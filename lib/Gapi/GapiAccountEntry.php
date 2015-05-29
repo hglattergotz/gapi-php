@@ -1,22 +1,20 @@
 <?php
 
-namespace Gapi;
-
 /**
  * Class GapiAccountEntry
- * 
+ *
  * Storage for individual Gapi account entries
  *
  */
 class GapiAccountEntry
 {
   private $properties = array();
-  
+
   public function __construct ($properties)
   {
     $this->properties = $properties;
   }
-  
+
   /**
    * toString function to return the name of the account
    *
@@ -28,12 +26,12 @@ class GapiAccountEntry
     {
       return $this->properties['title'];
     }
-    else 
+    else
     {
       return NULL;
     }
   }
-  
+
   /**
    * Get an associative array of the properties
    * and the matching values for the current result
@@ -44,7 +42,7 @@ class GapiAccountEntry
   {
     return $this->properties;
   }
-  
+
   /**
    * Call method to find a matching parameter to return
    *
@@ -59,16 +57,16 @@ class GapiAccountEntry
     {
       throw new \InvalidArgumentException('No such function "' . $name . '"');
     }
-    
+
     $name = preg_replace('/^get/','',$name);
-    
+
     $property_key = Gapi::array_key_exists_nc($name,$this->properties);
-    
+
     if ($property_key)
     {
       return $this->properties[$property_key];
     }
-    
+
     throw new \InvalidArgumentException('No valid property called "' . $name . '"');
   }
 }
